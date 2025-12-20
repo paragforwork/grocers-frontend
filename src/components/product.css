@@ -1,0 +1,116 @@
+.product-page{
+    display: flex;
+    align-items:top;
+    margin: 40px auto;
+    margin-left: 30px;
+    gap:30px;
+
+}
+.product-image {
+  width: 60vh;
+  height:60vh;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.product-page{
+    background-color: antiquewhite;
+    padding: 20px;
+    box-shadow: 0 20px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 30px;
+    border-radius: 30px;
+}
+.product-name {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+.product-price{
+    font-size: 2rem;
+    font-weight: 900;
+}
+.product-description{
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-style: oblique;
+}
+.add-to-cart-button {
+  padding: 12px 24px;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #462305; /* Pink color */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Comments / Reviews */
+.comments-section{
+  margin: 30px auto;
+  max-width: 1000px;
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+}
+.comments-section h2{
+  margin: 0 0 12px 0;
+}
+.comment-form{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom: 12px;
+}
+.comment-form textarea{
+  min-height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  resize: vertical;
+  font-size: 1rem;
+}
+.comment-form select{
+  width: 90px;
+  padding:6px 8px;
+  border-radius:6px;
+  border:1px solid #ddd;
+}
+.comment-form button{
+  align-self:flex-end;
+  padding:8px 12px;
+  background:#462305;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+.comments-list .comment-item{
+  padding:12px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+.comment-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  justify-content:space-between;
+}
+.comment-rating{
+  color:#f5a623;
+  font-weight:600;
+}
+.comment-date{
+  color:#777;
+  font-size:0.85rem;
+  margin-left: auto;
+}
+.comment-text{
+  margin:6px 0 0 0;
+  font-size:1rem;
+}
+
+@media (max-width: 800px){
+  .product-page{flex-direction:column; align-items:center}
+  .product-image{width:80vw;height:80vw}
+  .comments-section{width:90%;}
+}

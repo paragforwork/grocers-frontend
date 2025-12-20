@@ -1,0 +1,65 @@
+/* Main footer styles */
+.site-footer {
+  background-color:antiquewhite; /* Dark blue-grey background */
+  color: #140b02; /* Light grey text */
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Flex container for the columns */
+.footer-container {
+  display: flex;
+  justify-content: center; /* Spaces columns out evenly */
+  flex-wrap: wrap; /* Allows columns to stack on smaller screens */
+  max-width: 1100px;
+  margin: 0 auto; /* Centers the container */
+  padding-bottom: 30px;
+}
+
+/* Styling for each column */
+.footer-column {
+  flex: 1; /* Allows columns to grow and shrink evenly */
+  min-width: 250px; /* Minimum width before stacking */
+  margin: 10px;
+}
+
+.footer-column h4 {
+  color: #1c0303; /* White title text */
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #1b0e04; /* Blue accent line */
+  padding-bottom: 5px;
+  display: inline-block; /* Makes the border only as wide as the text */
+}
+
+.footer-column p {
+  line-height: 1.6;
+}
+
+/* Styling for the social media links */
+.social-links {
+  list-style: none;
+  padding: 0;
+}
+
+.social-links li {
+  margin-bottom: 8px;
+}
+
+.social-links a {
+  color: #291003;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #1f1601; /* Blue color on hover */
+}
+
+/* Bottom bar for copyright */
+.footer-bottom-bar {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #261705; /* Subtle separator line */
+  font-size: 0.9rem;
+}

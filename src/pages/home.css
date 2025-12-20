@@ -1,0 +1,71 @@
+html, body {
+    
+    background-image: url('C:\projects\grocers\app\public\background.jpeg');
+    margin-top:0px;
+    margin: 0;
+    padding: 0px;
+}
+.homepage{
+    display:flex;
+    /* align-items: center; */
+    gap:30px;
+    height: 50vh;
+    padding:10px;
+    background-color: rgb(247, 246, 246);
+    border-radius: 20px;
+    margin: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border:solid ;
+
+
+}
+.text-content{
+   flex:1;
+   padding-top:0px;
+   margin-top: 0px;
+   color: rgb(71, 34, 34);
+   margin-left: 20px;
+   margin-right: 20px;
+
+}
+.side-image{
+    width:30%;
+    height:50vh;
+    border-radius: 8px;
+    
+  
+}
+.title{
+    font-size: 2.5rem;
+    font-weight:bold;
+}
+.cta-button{
+    border-radius: 8px;
+    background-color: rgb(92, 31, 31);
+    color: white;
+    padding:15px
+    
+    
+}
+.content2{
+    display: flex;
+    
+    background-color: rgb(247, 246, 246);
+    border-radius: 20px;
+    margin: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border:solid ;
+}
+.fruits{
+    width:30%;
+    height:50vh;
+    border-radius: 8px;
+    margin:20px;
+    border-radius: 8px;
+    border: solid;
+    
+  
+}
+

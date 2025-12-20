@@ -1,0 +1,91 @@
+.login{
+    display:flex;
+    background-color: antiquewhite;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+    min-height: 80vh;
+    border: solid black;
+    border-radius: 15px;
+    font-family: Arial, sans-serif;
+    box-shadow: 50px 50px 20px rgba(0, 0, 0, 0.1);
+    
+}
+.login-form{
+    background-color: rgb(223, 223, 192);
+    padding:20px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Max width of the form */
+    text-align: center;
+    min-height: 50vh;
+}
+.form-group{
+    margin:20px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.5rem;
+  box-sizing: border-box; /* Important for padding and width calculation */
+  font-weight: bolder;
+  font-size: 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+.login-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #784b13; /* Primary theme color */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form h2 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.login-button:hover {
+  background-color: #8e7751; /* Darker shade on hover */
+}
+
+/* Link for signing up */
+.signup-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.signup-link a {
+  color: #2a9d8f; /* Primary theme color */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+.placeholder{
+    font-size: 0.2rem;
+    font-family: 'Times New Roman', Times, serif;
+}

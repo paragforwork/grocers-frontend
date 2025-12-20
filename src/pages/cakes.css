@@ -1,0 +1,19 @@
+.cake-list {
+  display: flex;
+  gap:20px;
+  margin-left: 10px;
+  margin-bottom: 40px;
+   flex-wrap: wrap;
+   text-decoration: none; 
+}
+.heading{
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   font-weight: 100;
+   display: flex;
+   justify-content: center;
+   background-color: antiquewhite;
+}  
+.cake-link{
+   text-decoration: none;
+   color: inherit;
+}

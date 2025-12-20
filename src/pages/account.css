@@ -1,0 +1,211 @@
+/* .account-container {
+    width: 600px;
+   
+    height: 75vh;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #eee5ce;
+    border-radius: 20px;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+    border:1px solid black;
+   
+}
+.account-heading {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+.account-section {
+ 
+    text-align: center;
+
+
+}
+.input-group{
+    gap:20px;
+    padding: 10px;
+    font-size: 2rem;
+    font-weight:500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+} */
+ /* General Page Background */
+body {
+    background-color: #f5f7fa; /* Light grey-blue background for contrast */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.account-container {
+    max-width: 600px;
+    width: 95%; /* Responsive width */
+    margin: 20px auto; /* Reduced margin (was 40px) */
+    padding: 30px; /* Comfortable internal spacing */
+    
+    background-color: #ffffff; /* Clean white card */
+    border-radius: 12px; /* Smooth corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Soft, modern shadow */
+    border: 1px solid #e1e4e8; /* Subtle border */
+    
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Maintains perfect consistent gaps between sections */
+}
+
+.account-heading {
+    text-align: center;
+    color: #1a1a1a;
+    margin: 0 0 10px 0; /* Reduced margin */
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Section Headings */
+.account-section h2 {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+/* Form Layout */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Gap between input rows */
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 80px 1fr; /* Label takes 80px, Input takes the rest */
+    align-items: center;
+    gap: 15px;
+}
+
+.input-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #444;
+    text-align: right; /* Aligns labels neatly */
+}
+
+/* Input Styling */
+.input-group input, 
+.input-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fafafa; /* Very light grey background */
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.input-group textarea {
+    resize: vertical;
+    min-height: 60px;
+    font-family: inherit;
+}
+
+/* Focus State (Active Input) */
+.input-group input:focus, 
+.input-group textarea:focus {
+    background-color: #fff;
+    border-color: #3b82f6; /* Nice blue focus color */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Save Button */
+.save-button {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #420b04; /* Vibrant Blue */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.save-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* My Orders Link */
+.my-orders-link-section {
+    text-align: center;
+}
+
+.orders-link {
+    text-decoration: none;
+    display: block;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px dashed #ced4da;
+    transition: all 0.2s;
+}
+
+.orders-link:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.orders-link h2 {
+    color: #495057;
+    margin: 0;
+    border: none;
+    font-size: 1rem;
+}
+
+/* Logout Section */
+.logout-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: #dc2626; /* Red text */
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.logout-button:hover {
+    background-color: #fee2e2; /* Light red background on hover */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+    .account-container {
+        padding: 20px;
+        margin: 10px auto;
+    }
+
+    .input-group {
+        grid-template-columns: 1fr; /* Stack vertically on small phones */
+        gap: 8px;
+    }
+
+    .input-group label {
+        text-align: left;
+    }
+}

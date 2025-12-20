@@ -1,0 +1,54 @@
+html,body{
+    margin: 0;
+    padding: 0px;
+}
+
+.name{
+    display:flex;
+    align-items: center;
+    background-color: antiquewhite;
+    gap:20px;
+    border-bottom: 2px solid black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+
+}
+.image1 img{
+    display:flex;
+    height:50px;
+
+}
+
+.image{
+    display: flex;
+    align-items: center;
+  
+}
+.image img{
+    height:25px;
+}
+.text{
+    margin-left: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    color: inherit;
+}
+.field{
+    margin-right: 20px;
+    font-weight: 500;
+    background-color: rgb(212, 121, 17);
+    border-radius: 10px;
+    padding:10px 5px;
+    color: white;
+    text-decoration-color  :black;
+
+}
+.left-side{
+    margin-left: auto;
+    display: flex;
+    gap:20px;
+    align-items: center;
+}
+.field .link{
+    text-decoration: none;
+    color: black;
+}
