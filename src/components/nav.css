@@ -52,3 +52,11 @@ html,body{
     text-decoration: none;
     color: black;
 }
+
+.admin-btn {
+    background-color: rgb(92, 31, 31);
+}
+
+.admin-btn .link {
+    color: white;
+}

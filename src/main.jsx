@@ -10,9 +10,15 @@ import Cakes from './pages/cakes.jsx'
 import Product from './components/product.jsx'
 import Accounts from './pages/accounts.jsx'
 import PrivateRoute from './components/privateRoute.jsx'
+import AdminRoute from './components/adminRoute.jsx'
+import AdminLayout from './components/adminLayout.jsx'
 import Cart from './pages/cart.jsx'
 import Checkout from './pages/checkout.jsx'
 import MyOrders from './pages/myorder.jsx'
+import AdminDashboard from './pages/adminDashboard.jsx'
+import AdminOrders from './pages/adminOrders.jsx'
+import AdminProducts from './pages/adminProducts.jsx'
+import AdminUsers from './pages/adminUsers.jsx'
 
 
 const router =createBrowserRouter([
@@ -56,6 +62,34 @@ const router =createBrowserRouter([
       },{
         path:'/myorders',
         element:<MyOrders/>
+      }
+    ]
+  },
+  // Admin routes
+  {
+    element: <AdminRoute />,
+    children: [
+      {
+        path: '/admin',
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <AdminDashboard />
+          },
+          {
+            path: 'orders',
+            element: <AdminOrders />
+          },
+          {
+            path: 'products',
+            element: <AdminProducts />
+          },
+          {
+            path: 'users',
+            element: <AdminUsers />
+          }
+        ]
       }
     ]
   }

@@ -28,8 +28,12 @@ export default  function Login() {
       console.log("Backend Response:", data);
 
       if (data.success) {
-        // Login Successful -> Redirect to Home
-        navigate("/");
+        // Check if user is admin and redirect accordingly
+        if (data.user.admin) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       } else {
         // Login Failed -> Show Alert
         alert(data.message || "Login failed");
