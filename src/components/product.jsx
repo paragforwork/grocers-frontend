@@ -1,7 +1,7 @@
 import Navbar from "./navbar";
 import Footer from "./footer";
 import { useParams, useNavigate } from "react-router-dom"; // 1. Added useNavigate
-import API_URL from "../config";
+import API_URL, { getImageUrl } from "../config";
 import "./product.css"
 import { useState, useEffect } from "react";
 
@@ -138,7 +138,7 @@ export default function Product() {
       <div className="product-page">
         <div className="product-image-container">
           <img
-            src={cake.image?.startsWith('http') ? cake.image : `/${cake.image?.replace(/^\.?\/?/, '')}`}
+            src={getImageUrl(cake.image)}
             alt={cake.name}
             className="product-image"
             onError={(e) => {

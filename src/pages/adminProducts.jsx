@@ -195,10 +195,12 @@ export default function AdminProducts() {
                         <div className="product-image-container">
                             {product.image && product.image.trim() !== "" ? (
                                 <img 
-                                    src={product.image.startsWith('http') ? product.image : `/${product.image.replace(/^\.?\/?/, '')}`}
+                                    src={product.image.startsWith('http') 
+                                        ? product.image 
+                                        : `${API_URL}${product.image.startsWith('/') ? product.image : '/' + product.image}`
+                                    }
                                     alt={product.name} 
                                     className="product-image"
-                                    // onLoad={() => console.log("Image loaded successfully:", product.image)}
                                      onError={(e) => {
                                         e.target.style.display = 'none';
                                         if (e.target.nextSibling) {
@@ -226,7 +228,7 @@ export default function AdminProducts() {
                             </div>
                         </div>
                     </div>
-                ))}            </div>
+                ))}</div>
         </div>
     );
 }

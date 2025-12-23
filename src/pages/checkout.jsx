@@ -2,7 +2,7 @@ import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import API_URL from "../config";
+import API_URL, { getImageUrl } from "../config";
 import "./checkout.css";
 
 export default function Checkout() {
@@ -253,7 +253,7 @@ export default function Checkout() {
               {items.map((item, index) => (
                 <div key={index} className="product-card">
                   <div className="image-wrapper">
-                    <img src={`/${item.image}`} alt={item.name} />
+                    <img src={getImageUrl(item.image)} alt={item.name} />
                   </div>
                   <div className="product-info">
                     <h3 className="product-title">{item.name}</h3>

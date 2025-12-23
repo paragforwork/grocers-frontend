@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import API_URL from "../config";
+import API_URL, { getImageUrl } from "../config";
 import "./cart.css"; 
 import { useNavigate } from "react-router-dom";
 export default function Cart() {
@@ -97,7 +97,7 @@ export default function Cart() {
                   <div key={item._id} className="cart-item">
                     <div className="item-image">
                       <img 
-                          src={item.product.image.startsWith("http") ? item.product.image : `/${item.product.image}`} 
+                          src={getImageUrl(item.product.image)} 
                           alt={item.product.name} 
                       />
                     </div>

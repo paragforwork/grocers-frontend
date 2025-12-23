@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
-import API_URL from '../config';
+import API_URL, { getImageUrl } from '../config';
 import './myorder.css';
 
 export default function MyOrders() {
@@ -94,7 +94,7 @@ export default function MyOrders() {
                                                 {/* Safety Check: If product was deleted from DB */}
                                                 {item.product ? (
                                                     <img 
-                                                        src={`/${item.product.image}`} 
+                                                        src={getImageUrl(item.product.image)} 
                                                         alt={item.product.name} 
                                                     />
                                                 ) : (
