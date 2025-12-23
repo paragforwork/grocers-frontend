@@ -7,6 +7,8 @@ import Home from './pages/home.jsx'
 import Login from './pages/login.jsx'
 import Signup from './pages/signup.jsx'
 import Cakes from './pages/cakes.jsx'
+import Grocery from './pages/grocery.jsx'
+import Bread from './pages/bread.jsx'
 import Product from './components/product.jsx'
 import Accounts from './pages/accounts.jsx'
 import PrivateRoute from './components/privateRoute.jsx'
@@ -44,6 +46,14 @@ const router =createBrowserRouter([
       {
         path: '/cakes',
         element: <Cakes />,
+      },
+      {
+        path: '/grocery',
+        element: <Grocery />,
+      },
+      {
+        path: '/bread',
+        element: <Bread />,
       },
       {
         path: '/products/:id',

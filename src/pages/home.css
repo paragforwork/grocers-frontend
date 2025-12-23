@@ -44,9 +44,15 @@ html, body {
     border-radius: 8px;
     background-color: rgb(92, 31, 31);
     color: white;
-    padding:15px
-    
-    
+    padding:15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover{
+    background-color: rgb(139, 47, 47);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .content2{
     display: flex;

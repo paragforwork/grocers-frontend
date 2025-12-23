@@ -32,9 +32,9 @@ export default function Navbar(){
         <div className="text">
             <Link to="/cakes" className="text">Cakes</Link></div>
          <div className="text">
-            <Link to="/cakes" className="text">Grocery</Link></div>
+            <Link to="/grocery" className="text">Grocery</Link></div>
          <div className="text">
-            <Link to="/cakes" className="text">Vegies</Link></div>
+            <Link to="/bread" className="text">Bread</Link></div>
        
         <div className="left-side">
             

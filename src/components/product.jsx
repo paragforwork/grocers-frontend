@@ -137,9 +137,14 @@ export default function Product() {
       <div className="product-page">
         <div className="product-image-container">
           <img
-            src={`/${cake.image}`}
+            src={cake.image?.startsWith('http') ? cake.image : `/${cake.image?.replace(/^\.?\/?/, '')}`}
             alt={cake.name}
             className="product-image"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              e.target.parentElement.style.backgroundColor = '#e0e0e0';
+              e.target.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;">No Image</div>';
+            }}
           />
         </div>
 
@@ -149,7 +154,7 @@ export default function Product() {
           <p className="product-description">{cake.description}</p>
           
           {/* Action Buttons Container */}
-          <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
+          <div className="product-actions">
             <button 
               className="add-to-cart-button"
               onClick={handleclick}
@@ -161,7 +166,6 @@ export default function Product() {
             <button 
               className="add-to-cart-button"
               onClick={handleBuyNow}
-            
             >
               Buy Now
             </button>

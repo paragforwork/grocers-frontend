@@ -10,7 +10,8 @@ export default function AdminProducts() {
         name: "",
         price: "",
         description: "",
-        image: ""
+        image: "",
+        category: "cake"
     });
     const [imageFile, setImageFile] = useState(null);
 
@@ -50,6 +51,7 @@ export default function AdminProducts() {
             formDataToSend.append("name", formData.name);
             formDataToSend.append("price", formData.price);
             formDataToSend.append("description", formData.description);
+            formDataToSend.append("category", formData.category);
             
             if (imageFile) {
                 formDataToSend.append("image", imageFile);
@@ -100,13 +102,14 @@ export default function AdminProducts() {
             name: product.name,
             price: product.price,
             description: product.description || "",
-            image: product.image || ""
+            image: product.image || "",
+            category: product.category || "cake"
         });
         setShowForm(true);
     };
 
     const resetForm = () => {
-        setFormData({ name: "", price: "", description: "", image: "" });
+        setFormData({ name: "", price: "", description: "", image: "", category: "cake" });
         setImageFile(null);
         setEditingProduct(null);
         setShowForm(false);
@@ -147,6 +150,18 @@ export default function AdminProducts() {
                                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                             />
                         </div>
+                    </div>
+                    <div className="form-group">
+                        <label>Category *</label>
+                        <select
+                            required
+                            value={formData.category}
+                            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        >
+                            <option value="cake">Cake</option>
+                            <option value="grocery">Grocery</option>
+                            <option value="bread">Bread</option>
+                        </select>
                     </div>
                     <div className="form-group">
                         <label>Description</label>
@@ -201,6 +216,7 @@ export default function AdminProducts() {
                         <div className="product-details">
                             <h3>{product.name}</h3>
                             <p className="product-price">₹{product.price}</p>
+                            <p className="product-category">Category: {product.category}</p>
                             <p className="product-description">{product.description}</p>
                             <div className="product-actions">
                                 <button className="edit-btn" onClick={() => handleEdit(product)}>

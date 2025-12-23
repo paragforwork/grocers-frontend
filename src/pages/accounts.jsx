@@ -163,7 +163,7 @@ export default function Accounts() {
 
         {/* ORDER HISTORY LINK */}
         <div className="account-section my-orders-link-section">
-          <Link to="/my-orders" className="orders-link">
+          <Link to="/myorders" className="orders-link">
             <h2>View My Orders</h2>
           </Link>
         </div>

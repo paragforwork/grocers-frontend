@@ -13,13 +13,12 @@ export default function Checkout() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // FIX 1: Update State keys to match Backend Schema exactly
   const [shippingInfo, setShippingInfo] = useState({
-    fullname: "",   // Added this because backend requires it
+    fullname: "",
     address: "",
     city: "",
-    postalcode: "", // Changed from 'pincode'
-    phone: ""       // Changed from 'phoneNo'
+    postalcode: "",
+    phone: ""
   });
   
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -77,66 +76,165 @@ export default function Checkout() {
   const handleInputChange = (e) => {
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
   };
- const handlePlaceOrder = async (e) => {
-    e.preventDefault();
 
-    if (!shippingInfo.fullname || !shippingInfo.address || !shippingInfo.city || !shippingInfo.postalcode || !shippingInfo.phone) {
-      alert("Please fill in all shipping details.");
-      return;
-    }
+  const handlePlaceOrder = async (e) => {
+    e.preventDefault();
 
-    const orderPayload = {
-      items: items.map(item => ({
-        product: item.product, 
-        quantity: item.quantity
-      })),
-      shippingInfo: shippingInfo, 
-      paymentInfo: { method: paymentMethod }
-    };
+    if (!shippingInfo.fullname || !shippingInfo.address || !shippingInfo.city || !shippingInfo.postalcode || !shippingInfo.phone) {
+      alert("Please fill in all shipping details.");
+      return;
+    }
 
-    try {
-      // 1. Create the Order
-      const response = await fetch("http://localhost:8080/order/new", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(orderPayload)
-      });
+    try {
+      // ============================================
+      // STEP 1: Create Order in DB as "Pending"
+      // ============================================
+      const createOrderRes = await fetch("http://localhost:8080/order/create-pending", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          items: items.map(item => ({
+            product: item.product,
+            quantity: item.quantity
+          })),
+          shippingInfo: shippingInfo,
+          paymentMethod: paymentMethod
+        })
+      });
 
-      const result = await response.json();
+      const orderData = await createOrderRes.json();
 
-      if (response.ok) {
-        // --- NEW LOGIC START ---
-        
-        // Check: Did we come from "Buy Now"?
-        // If location.state.singleItem exists, it was a "Buy Now" (Direct Purchase).
-        // In that case, we DO NOT clear the cart.
-        const isBuyNow = location.state?.singleItem;
+      if (!orderData.success) {
+        alert(orderData.message || "Failed to create order");
+        return;
+      }
 
-        if (!isBuyNow) {
-            // If it was a standard Cart checkout, clear the database cart now.
-            try {
-                await fetch("http://localhost:8080/cart/clear", {
-                    method: "DELETE",
-                    credentials: "include"
-                });
-            } catch (clearErr) {
-                console.error("Failed to clear cart:", clearErr);
-                // We don't stop the user here because the order was already placed.
-            }
+      const orderId = orderData.orderId;
+      const amount = orderData.totalAmount;
+
+      // ============================================
+      // STEP 2: If COD, confirm and finish
+      // ============================================
+      if (paymentMethod === 'COD') {
+        await confirmOrder(orderId, null, 'COD');
+        return;
+      }
+
+      // ============================================
+      // STEP 3: If Online, create Razorpay order
+      // ============================================
+      const razorpayRes = await fetch("http://localhost:8080/order/create-razorpay-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ orderId, amount })
+      });
+
+      const razorpayData = await razorpayRes.json();
+
+      if (!razorpayData.success) {
+        alert("Failed to initiate payment");
+        return;
+      }
+
+      // ============================================
+      // STEP 4: Open Razorpay Checkout
+      // ============================================
+      const options = {
+        key: razorpayData.key_id,
+        amount: razorpayData.razorpayOrder.amount,
+        currency: razorpayData.razorpayOrder.currency,
+        name: "Grocers Store",
+        description: `Order #${orderId}`,
+        order_id: razorpayData.razorpayOrder.id,
+        handler: async function (response) {
+          // Payment successful
+          await confirmOrder(
+            orderId,
+            {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            },
+            'Online'
+          );
+        },
+        prefill: {
+          name: shippingInfo.fullname,
+          contact: shippingInfo.phone
+        },
+        theme: {
+          color: "#3399cc"
+        },
+        modal: {
+          ondismiss: function() {
+            alert("Payment cancelled. Your order is saved as pending.");
+            navigate("/myorders");
+          }
         }
-        // --- NEW LOGIC END ---
+      };
 
-        alert("Order Placed Successfully!");
-        //navigate("/myorders"); // Redirect to orders page
-      } else {
-        alert(result.message || "Failed to place order");
-      }
-    } catch (error) {
-      console.error("Order Error:", error);
-      alert("Something went wrong");
-    }
-  };
+      const rzp = new window.Razorpay(options);
+      
+      rzp.on('payment.failed', function (response) {
+        alert("Payment failed. Your order is saved, you can retry payment later.");
+        navigate("/myorders");
+      });
+
+      rzp.open();
+
+    } catch (error) {
+      console.error("Order Error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
+  // ============================================
+  // Confirm Payment & Clear Cart
+  // ============================================
+  const confirmOrder = async (orderId, paymentDetails, paymentMethod) => {
+    try {
+      const confirmRes = await fetch("http://localhost:8080/order/confirm-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          orderId,
+          ...paymentDetails,
+          paymentMethod
+        })
+      });
+
+      const confirmData = await confirmRes.json();
+
+      if (confirmData.success) {
+        // Clear cart only if it wasn't a "Buy Now" action
+        const isBuyNow = location.state?.singleItem;
+        if (!isBuyNow) {
+          try {
+            await fetch("http://localhost:8080/cart/clear", {
+              method: "DELETE",
+              credentials: "include"
+            });
+          } catch (clearErr) {
+            console.error("Failed to clear cart:", clearErr);
+          }
+        }
+
+        alert("Order placed successfully!");
+        navigate("/myorders");
+      } else {
+        alert(confirmData.message || "Payment verification failed");
+        navigate("/myorders"); // Still navigate - order exists
+      }
+
+    } catch (error) {
+      console.error("Confirmation Error:", error);
+      alert("Order created but confirmation failed. Check your orders page.");
+      navigate("/myorders");
+    }
+  };
 
   if (loading) return <div>Loading...</div>;
 
@@ -179,7 +277,6 @@ export default function Checkout() {
               <h3>Shipping Address</h3>
               <form className="address-form">
                 
-                {/* FIX 2: Added Full Name Input */}
                 <input 
                   type="text" 
                   name="fullname" 
@@ -197,7 +294,6 @@ export default function Checkout() {
                   value={shippingInfo.city} onChange={handleInputChange} 
                 />
                 
-                {/* FIX 3: Updated name attributes */}
                 <input 
                   type="text" 
                   name="postalcode" 

@@ -5,43 +5,42 @@ import Navbar from "../components/navbar";
 import "./cakes.css";
 import { Link } from "react-router-dom";
 
-export default function Cakes() {
-  const [cakes, setCakes] = useState([]);
+export default function Bread() {
+  const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const fetchCakes = async () => {
+    const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:8080/products", {
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
+        const response = await fetch("http://localhost:8080/products?category=bread", {
+          credentials: "include", 
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
         const data = await response.json();
 
         if (Array.isArray(data)) {
-          const cakeProducts = data.filter(product => 
-            product.category === 'cake' || !product.category
-          );
-          setCakes(cakeProducts);
+          setProducts(data);
         } else {
-          setError(data.message || "Please login to view our cakes.");
+          setError(data.message || "Please login to view bread items.");
         }
       } catch (error) {
-        console.error("Error fetching cakes:", error);
+        console.error("Error fetching bread items:", error);
         setError("Something went wrong. Please check your connection.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCakes();
+    fetchProducts();
   }, []);
 
-  const filteredCakes = cakes.filter((cake) =>
-    cake.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -55,7 +54,7 @@ export default function Cakes() {
           <input
             type="text"
             className="search-input"
-            placeholder="Search for your favorite cake..."
+            placeholder="Search for your favorite bread..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -65,10 +64,9 @@ export default function Cakes() {
       {/* --- BLOCK 2: HEADING SECTION --- */}
       {/* Completely separate div with its own background */}
       <div className="heading-container">
-        <h1 className="heading">Our Speciality Cakes</h1>
+        <h1 className="heading">Fresh Bread</h1>
       </div>
 
-      {/* --- BLOCK 3: CONTENT --- */}
       {error ? (
         <div style={{ textAlign: "center", marginTop: "50px", color: "red" }}>
           <h2>Access Denied</h2>
@@ -78,16 +76,16 @@ export default function Cakes() {
       ) : (
         <div className="cake-list">
           {loading ? (
-             <p style={{ textAlign: "center", width: "100%", fontSize: "1.2rem" }}>Loading delicious cakes...</p>
+             <p style={{ textAlign: "center", width: "100%", fontSize: "1.2rem" }}>Loading bread items...</p>
           ) : (
-             filteredCakes.length > 0 ? (
-               filteredCakes.map((cake) => (
-                <Link to={`/products/${cake._id}`} key={cake._id} className="cake-link">
+             filteredProducts.length > 0 ? (
+               filteredProducts.map((product) => (
+                <Link to={`/products/${product._id}`} key={product._id} className="cake-link">
                   <div className="cake-box">
                     <Cakecard
-                      name={cake.name}
-                      price={cake.price}
-                      imgsrc={cake.image} 
+                      name={product.name}
+                      price={product.price}
+                      imgsrc={product.image} 
                     />
                   </div>
                 </Link>
@@ -95,7 +93,7 @@ export default function Cakes() {
              ) : (
                <div style={{ textAlign: "center", width: "100%", marginTop: "20px" }}>
                   <p style={{ fontSize: "1.5rem", color: "#888" }}>😕</p>
-                  <p>No cakes found matching "{searchQuery}"</p>
+                  <p>No bread items found matching "{searchQuery}"</p>
                </div>
              )
           )}
