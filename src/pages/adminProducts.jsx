@@ -26,9 +26,7 @@ export default function AdminProducts() {
                 credentials: "include",
             });
             const data = await response.json();
-          //  console.log("Fetched products:", data);
             if (data.success) {
-              //  console.log("Products array:", data.products);
                 setProducts(data.products);
             }
         } catch (error) {
@@ -71,10 +69,12 @@ export default function AdminProducts() {
                 alert(data.message);
                 fetchProducts();
                 resetForm();
+            } else {
+                alert(data.message || "Failed to save product");
             }
         } catch (error) {
-            console.error("Failed to save product:", error);
-            alert("Failed to save product");
+            console.error("Error saving product:", error);
+            alert("Network error: Failed to save product");
         }
     };
 
@@ -190,9 +190,7 @@ export default function AdminProducts() {
             )}
 
             <div className="products-grid">
-                {products.map((product) => {
-                    // console.log("Rendering product:", product.name, "Image URL:", product.image);
-                    return (
+                {products.map((product) => (
                     <div key={product._id} className="product-card">
                         <div className="product-image-container">
                             {product.image && product.image.trim() !== "" ? (
@@ -201,8 +199,7 @@ export default function AdminProducts() {
                                     alt={product.name} 
                                     className="product-image"
                                     // onLoad={() => console.log("Image loaded successfully:", product.image)}
-                                    onError={(e) => {
-                                        // console.error("Image failed to load:", product.image);
+                                     onError={(e) => {
                                         e.target.style.display = 'none';
                                         if (e.target.nextSibling) {
                                             e.target.nextSibling.style.display = 'flex';
@@ -229,8 +226,7 @@ export default function AdminProducts() {
                             </div>
                         </div>
                     </div>
-                )})}
-            </div>
+                ))}            </div>
         </div>
     );
 }
