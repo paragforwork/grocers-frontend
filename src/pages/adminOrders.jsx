@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_URL from "../config";
 import "./adminOrders.css";
 
 export default function AdminOrders() {
@@ -13,8 +14,8 @@ export default function AdminOrders() {
     const fetchOrders = async () => {
         try {
             const url = filter 
-                ? `http://localhost:8080/admin/orders?status=${filter}`
-                : "http://localhost:8080/admin/orders";
+                ? `${API_URL}/admin/orders?status=${filter}`
+                : `${API_URL}/admin/orders`;
             
             const response = await fetch(url, {
                 credentials: "include",
@@ -32,7 +33,7 @@ export default function AdminOrders() {
 
     const updateOrderStatus = async (orderId, newStatus) => {
         try {
-            const response = await fetch(`http://localhost:8080/admin/orders/${orderId}/status`, {
+            const response = await fetch(`${API_URL}/admin/orders/${orderId}/status`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },

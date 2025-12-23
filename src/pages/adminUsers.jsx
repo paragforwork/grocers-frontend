@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_URL from "../config";
 import "./adminUsers.css";
 
 export default function AdminUsers() {
@@ -11,7 +12,7 @@ export default function AdminUsers() {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:8080/admin/users", {
+            const response = await fetch(`${API_URL}/admin/users`, {
                 credentials: "include",
             });
             const data = await response.json();

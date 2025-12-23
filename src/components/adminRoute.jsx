@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
+import API_URL from "../config";
 
 export default function AdminRoute() {
     const [isAdmin, setIsAdmin] = useState(null);
@@ -8,7 +9,7 @@ export default function AdminRoute() {
     useEffect(() => {
         const checkAdmin = async () => {
             try {
-                const response = await fetch("http://localhost:8080/api/check-auth", {
+                const response = await fetch(`${API_URL}/api/check-auth`, {
                     credentials: "include",
                 });
                 const data = await response.json();

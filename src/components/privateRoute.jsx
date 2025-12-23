@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import {Navigate,Outlet} from "react-router-dom"
+import API_URL from "../config";
 
 
 export default function PrivateRoute(){
@@ -8,7 +9,7 @@ export default function PrivateRoute(){
     useEffect(()=>{
         const verifyAuth =async()=>{
             try{
-                const response = await fetch("http://localhost:8080/api/check-auth",{
+                const response = await fetch(`${API_URL}/api/check-auth`,{
                     method:"GET",
                     credentials:"include"
                 });

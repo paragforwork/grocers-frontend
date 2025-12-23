@@ -2,6 +2,7 @@ import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import API_URL from "../config";
 import "./checkout.css";
 
 export default function Checkout() {
@@ -46,7 +47,7 @@ export default function Checkout() {
 
   const fetchCartItems = async () => {
     try {
-      const res = await fetch("http://localhost:8080/cart/display", {
+      const res = await fetch(`${API_URL}/cart/display`, {
         credentials: "include",
         method: "GET",
         headers: { "Content-Type": "application/json" }
@@ -89,7 +90,7 @@ export default function Checkout() {
       // ============================================
       // STEP 1: Create Order in DB as "Pending"
       // ============================================
-      const createOrderRes = await fetch("http://localhost:8080/order/create-pending", {
+      const createOrderRes = await fetch(`${API_URL}/order/create-pending`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -124,7 +125,7 @@ export default function Checkout() {
       // ============================================
       // STEP 3: If Online, create Razorpay order
       // ============================================
-      const razorpayRes = await fetch("http://localhost:8080/order/create-razorpay-order", {
+      const razorpayRes = await fetch(`${API_URL}/order/create-razorpay-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -195,7 +196,7 @@ export default function Checkout() {
   // ============================================
   const confirmOrder = async (orderId, paymentDetails, paymentMethod) => {
     try {
-      const confirmRes = await fetch("http://localhost:8080/order/confirm-payment", {
+      const confirmRes = await fetch(`${API_URL}/order/confirm-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -213,7 +214,7 @@ export default function Checkout() {
         const isBuyNow = location.state?.singleItem;
         if (!isBuyNow) {
           try {
-            await fetch("http://localhost:8080/cart/clear", {
+            await fetch(`${API_URL}/cart/clear`, {
               method: "DELETE",
               credentials: "include"
             });

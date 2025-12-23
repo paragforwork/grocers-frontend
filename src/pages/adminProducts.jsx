@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_URL from "../config";
 import "./adminProducts.css";
 
 export default function AdminProducts() {
@@ -21,7 +22,7 @@ export default function AdminProducts() {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch("http://localhost:8080/admin/products", {
+            const response = await fetch(`${API_URL}/admin/products`, {
                 credentials: "include",
             });
             const data = await response.json();
@@ -42,8 +43,8 @@ export default function AdminProducts() {
         
         try {
             const url = editingProduct
-                ? `http://localhost:8080/admin/products/${editingProduct._id}`
-                : "http://localhost:8080/admin/products";
+                ? `${API_URL}/admin/products/${editingProduct._id}`
+                : `${API_URL}/admin/products`;
             
             const method = editingProduct ? "PUT" : "POST";
 
@@ -81,7 +82,7 @@ export default function AdminProducts() {
         if (!confirm("Are you sure you want to delete this product?")) return;
 
         try {
-            const response = await fetch(`http://localhost:8080/admin/products/${id}`, {
+            const response = await fetch(`${API_URL}/admin/products/${id}`, {
                 method: "DELETE",
                 credentials: "include",
             });

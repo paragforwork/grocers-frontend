@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
-import './myorder.css'; 
+import API_URL from '../config';
+import './myorder.css';
 
 export default function MyOrders() {
     const [orders, setOrders] = useState([]);
@@ -11,7 +12,7 @@ export default function MyOrders() {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await fetch('http://localhost:8080/order/myorders', {
+                const response = await fetch(`${API_URL}/order/myorders`, {
                     method: 'GET',
                     credentials: 'include', // Important: Sends cookies to backend
                     headers: { 'Content-Type': 'application/json' }

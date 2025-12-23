@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_URL from "../config";
 import "./adminDashboard.css";
 
 export default function AdminDashboard() {
@@ -8,7 +9,7 @@ export default function AdminDashboard() {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const response = await fetch("http://localhost:8080/admin/stats", {
+                const response = await fetch(`${API_URL}/admin/stats`, {
                     credentials: "include",
                 });
                 const data = await response.json();

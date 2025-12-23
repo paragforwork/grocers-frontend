@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { Link, useNavigate } from "react-router-dom";
+import API_URL from "../config";
 import "./account.css";
 
 export default function Accounts() {
@@ -19,7 +20,7 @@ export default function Accounts() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/accounts/profile", {
+        const response = await fetch(`${API_URL}/api/accounts/profile`, {
           method: "GET",
           credentials: "include",
         });
@@ -50,7 +51,7 @@ export default function Accounts() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/accounts/profile", {
+      const response = await fetch(`${API_URL}/api/accounts/profile`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

@@ -2,7 +2,7 @@ import React from "react"
 import { Form } from "react-router-dom"
 import "./login.css"
 import { useNavigate } from "react-router-dom"
-
+import API_URL from "../config"
 import { useEffect,useState } from "react"
 
 export default  function Login() {
@@ -13,7 +13,7 @@ export default  function Login() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/login", {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // IMPORTANT: This tells the browser to accept and save the cookies sent by the backend

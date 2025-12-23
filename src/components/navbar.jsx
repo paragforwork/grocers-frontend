@@ -1,6 +1,7 @@
 import "./nav.css"
 import { Link } from "react-router-dom"
 import {CircleUser} from "lucide-react"
+import API_URL from "../config"
 import { useState, useEffect } from "react"
 
 export default function Navbar(){
@@ -9,7 +10,7 @@ export default function Navbar(){
     useEffect(() => {
         const checkAdmin = async () => {
             try {
-                const response = await fetch("http://localhost:8080/api/check-auth", {
+                const response = await fetch(`${API_URL}/api/check-auth`, {
                     credentials: "include",
                 });
                 const data = await response.json();

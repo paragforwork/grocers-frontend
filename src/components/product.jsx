@@ -1,6 +1,7 @@
 import Navbar from "./navbar";
 import Footer from "./footer";
 import { useParams, useNavigate } from "react-router-dom"; // 1. Added useNavigate
+import API_URL from "../config";
 import "./product.css"
 import { useState, useEffect } from "react";
 
@@ -16,7 +17,7 @@ export default function Product() {
   useEffect(() => {
     const fetchCakes = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/products/${id}`, {
+        const response = await fetch(`${API_URL}/products/${id}`, {
           credentials: "include"
         });
 
@@ -39,7 +40,7 @@ export default function Product() {
 
   async function fetchComments(productId) {
     try {
-      const res = await fetch(`http://localhost:8080/products/${productId}/comments`,{
+      const res = await fetch(`${API_URL}/products/${productId}/comments`,{
         credentials: 'include',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -57,7 +58,7 @@ export default function Product() {
     if (!cake) return;
 
     try {
-      const response = await fetch("http://localhost:8080/cart/add", {
+      const response = await fetch(`${API_URL}/cart/add`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -107,7 +108,7 @@ export default function Product() {
     if (!newCommentText.trim()) return alert('Comment cannot be empty');
 
     try {
-      const res = await fetch(`http://localhost:8080/products/${id}/comments`, {
+      const res = await fetch(`${API_URL}/products/${id}/comments`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

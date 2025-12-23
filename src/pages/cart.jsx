@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import API_URL from "../config";
 import "./cart.css"; 
 import { useNavigate } from "react-router-dom";
 export default function Cart() {
@@ -16,7 +17,7 @@ export default function Cart() {
   const fetchCart = async () => {
     try {
       // Ensure this matches your backend route (e.g., /cart or /cart/display)
-      const response = await fetch("http://localhost:8080/cart/display", {
+      const response = await fetch(`${API_URL}/cart/display`, {
         method: "GET",
         credentials: "include",  
         headers: {
@@ -41,7 +42,7 @@ export default function Cart() {
   // 2. NEW: Remove Item Function
   const removeItem = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:8080/cart/remove/${productId}`, {
+      const response = await fetch(`${API_URL}/cart/remove/${productId}`, {
         method: "DELETE", // Use DELETE method
         credentials: "include", // Send cookies
       });

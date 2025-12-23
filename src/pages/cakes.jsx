@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Cakecard from "../components/cakecard";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
+import API_URL from "../config";
 import "./cakes.css";
 import { Link } from "react-router-dom";
 
@@ -14,7 +15,7 @@ export default function Cakes() {
   useEffect(() => {
     const fetchCakes = async () => {
       try {
-        const response = await fetch("http://localhost:8080/products", {
+        const response = await fetch(`${API_URL}/products`, {
           credentials: "include",
           headers: { "Content-Type": "application/json" },
         });
