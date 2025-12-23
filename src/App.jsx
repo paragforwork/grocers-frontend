@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Home from './pages/home'
 
-import "./app.css"
+import "./App.css"
 function App() {
 
 
