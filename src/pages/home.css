@@ -1,6 +1,6 @@
 html, body {
     
-    background-image: url('C:\projects\grocers\app\public\background.jpeg');
+    background-image: url('/background.jpeg');
     margin-top:0px;
     margin: 0;
     padding: 0px;
